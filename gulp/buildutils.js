@@ -6,9 +6,12 @@ const path = require("path");
 
 module.exports = {
     getRevision: function (useLast = false) {
-        const commitHash = execSync("git rev-parse --short " + (useLast ? "HEAD^1" : "HEAD")).toString(
-            "ascii"
-        );
+        let commitHash;
+        try {
+            commitHash = execSync("git rev-parse --short " + (useLast ? "HEAD^1" : "HEAD")).toString("ascii");
+        } catch (ex) {
+            commitHash = process.env.VERCEL_GIT_COMMIT_SHA ? process.env.VERCEL_GIT_COMMIT_SHA.slice(0, 7) : "vercel";
+        }
         return commitHash.replace(/^\s+|\s+$/g, "");
     },
 

@@ -1,0 +1,5 @@
+{
+  "installCommand": "yarn install --ignore-engines && cd gulp && yarn install --ignore-engines && yarn add @ffmpeg-installer/ffmpeg --ignore-engines",
+  "buildCommand": "bash vercel-build.sh",
+  "outputDirectory": "build"
+}
